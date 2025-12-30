@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Rota ao vivo</title>
+  <link rel="manifest" href="manifest.json"/>
+  <style>
+    body{margin:0;height:100vh;background:#000;display:flex;align-items:center;justify-content:center;font-family:monospace;color:#0f0}
+    .glass{padding:2rem 3rem;background:rgba(0,0,0,.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.1);border-radius:12px}
+  </style>
+</head>
+<body>
+  <div class="glass"><h1>Carregando rota...</h1><p id="s">Aguardando GPS</p></div>
+  <script type="module" src="track.js"></script>
+</body>
+</html>
