@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <title>Painel Rastre</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <h1>Rastre – Painel</h1>
+  <input id="idInput" placeholder="Digite o ID do rastreado"/>
+  <button onclick="mostrar()">Buscar</button>
+  <div id="mapa" style="height:400px; background:#222;"></div>
+
+  <script>
+    const { createClient } = supabase;
+    const sb = createClient(
+      'https://byubmwigggommciqtpbw.supabase.co',
+      'sb_publishable_Aus30FwBq2sajsqa38qLKw__FOBZk2-'
+    );
+
+    async function mostrar() {
+      const id = document.getElementById('idInput').value;
+      const { data, error } = await sb
+        .from('localizacoes')
+        .select('*')
+        .eq('id', id)
+        .order('timestamp', { ascending: false })
+        .limit(1);
+
+      if (error || !data.length) return alert('Nada encontrado');
+      const { lat, lng } = data[0];
+      document.getElementById('mapa').innerHTML =
+        `<iframe width="100%" height="100%"
+         src="https://maps.google.com/maps?q=${lat},${lng}&z=16&output=embed"></iframe>`;
+    }
+  </script>
+</body>
+</html>
